@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: Update and upgrade apt packages
+     apt:
+       update_cache: yes
+       cache_valid_time: 3600
+       upgrade: yes
+
+   - name: Remove dependencies that are no longer required
+     apt:
+      autoremove: yes
+
+   - name: Install qemu-guest-agent
+     apt:
+       name: qemu-guest-agent
+       state: present
